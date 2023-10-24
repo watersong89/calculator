@@ -7,6 +7,7 @@ let displayElement = document.querySelector('.display');
 let numButtons = document.querySelectorAll('.js-number-button');
 let operatorButtons = document.querySelectorAll('.js-operator-button');
 let equalsButton = document.querySelector('.js-equals-button');
+let clearButton = document.querySelector('.js-clear-button');
 
 function add(num1, num2) {
   return Number(num1) + Number(num2);
@@ -40,6 +41,14 @@ function updateDisplay() {
   displayElement.textContent = displayValue;
 }
 
+function clearCalculator() {
+  num1 = null;
+  num2 = null;
+  operator = null;
+  displayValue = '';
+  updateDisplay();
+}
+
 numButtons.forEach(button => {
   button.addEventListener('click', () => {
     displayValue += button.value;
@@ -59,5 +68,10 @@ equalsButton.addEventListener('click', () => {
   num1 = operationArray[0];
   operator = operationArray[1];
   num2 = operationArray[2];
-  console.log(operate(num1, operator, num2))
+  let result = operate(num1, operator, num2);
+  displayElement.textContent = result;
+})
+
+clearButton.addEventListener('click', () => {
+  clearCalculator();
 })
