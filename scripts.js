@@ -32,6 +32,11 @@ equalsButton.addEventListener('click', () => {
   updateDisplay();
 })
 
+clearButton.addEventListener('click', () => {
+  clearCalculator();
+  updateDisplay();
+})
+
 function addNumber(input) {
   if (displayValue === 0 || displayValue === '0' || calculated === true) {
     displayValue = input;
@@ -67,6 +72,14 @@ function clickEquals() {
   num2 = '';
   operator = null;
   calculated = true;
+}
+
+function clearCalculator () {
+  num1 = null;
+  num2 = '';
+  operator = null;
+  displayValue = '0';
+  calculated = false;
 }
 
 function operate(num1, operator, num2) {
