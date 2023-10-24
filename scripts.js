@@ -2,8 +2,10 @@ let num1 = null;
 let num2 = null;
 let operator = null;
 let displayValue = '';
+let runningTotalValue = '';
 
 let displayElement = document.querySelector('.display');
+let runningTotalElement = document.querySelector('.running-total');
 let numButtons = document.querySelectorAll('.js-number-button');
 let operatorButtons = document.querySelectorAll('.js-operator-button');
 let equalsButton = document.querySelector('.js-equals-button');
