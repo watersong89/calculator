@@ -9,6 +9,7 @@ let numButtons = document.querySelectorAll('.js-number-button');
 let operatorButtons = document.querySelectorAll('.js-operator-button');
 let equalsButton = document.querySelector('.js-equals-button');
 let clearButton = document.querySelector('.js-clear-button');
+let pointButton = document.querySelector('.js-point-button');
 
 updateDisplay();
 
@@ -37,6 +38,12 @@ clearButton.addEventListener('click', () => {
   updateDisplay();
 })
 
+pointButton.addEventListener('click', () => {
+  addPoint(pointButton.value);
+  updateDisplay();
+})
+
+
 function addNumber(input) {
   if (displayValue === 0 || displayValue === '0' || calculated === true) {
     displayValue = input;
@@ -47,6 +54,12 @@ function addNumber(input) {
     num2 += input;
     displayValue = `${num1} ${operator} ${num2}`
   }
+}
+
+function addPoint(input) {
+  if (displayValue.includes('.')) {
+    return
+  } else addNumber(input);
 }
 
 function addOperator(input) {
