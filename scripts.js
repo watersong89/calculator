@@ -55,7 +55,11 @@ function addOperator(input) {
     operator = input;
     displayValue = `${num1} ${input}`;
   } else if (operator !== null) {
+    if (hasDecimal(`${operate(num1, operator, num2)}`) === true) {
+      displayValue = roundToX(`${operate(num1, operator, num2)}`, 8);
+    } else {
     displayValue = `${operate(num1, operator, num2)}`;
+    }
     num1 = displayValue;
     num2 = '';
     operator = input;
@@ -70,7 +74,11 @@ function clickEquals() {
   if (num2 === '') {
     return;
   } else {
+    if (hasDecimal(`${operate(num1, operator, num2)}`) === true) {
+      displayValue = roundToX(`${operate(num1, operator, num2)}`, 8);
+    } else {
     displayValue = `${operate(num1, operator, num2)}`;
+    }
     num1 = null;
     num2 = '';
     operator = null;
@@ -96,4 +104,16 @@ function operate(num1, operator, num2) {
   } if (operator === '/') {
     return Number(num1) / Number(num2);
   }
+}
+
+function hasDecimal (n) {
+  let result = (n - Math.floor(n)) !== 0;
+
+  if (result) return true;
+  else return false;
+}
+
+function roundToX(num, decimals) {
+  const multiplier = Math.pow(10, decimals);
+  return Math.round(num * multiplier) / multiplier;
 }
