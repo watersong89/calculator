@@ -68,14 +68,23 @@ function addOperator(input) {
     operator = input;
     displayValue = `${num1} ${input}`;
   } else if (operator !== null) {
-    if (hasDecimal(`${operate(num1, operator, num2)}`) === true) {
+    if (`${operate(num1, operator, num2)}` === 'snark') {
+      displayValue = 'Nice try muthafucka!';
+      num1 = null;
+      num2 = '';
+      operator = null;
+      calculated = true;
+    } else if (hasDecimal(`${operate(num1, operator, num2)}`) === true) {
       displayValue = roundToX(`${operate(num1, operator, num2)}`, 8);
+      num1 = displayValue;
+      num2 = '';
+      operator = input;
     } else {
-    displayValue = `${operate(num1, operator, num2)}`;
+      displayValue = `${operate(num1, operator, num2)}`;
+      num1 = displayValue;
+      num2 = '';
+      operator = input;
     }
-    num1 = displayValue;
-    num2 = '';
-    operator = input;
   }
 }
 
@@ -87,10 +96,16 @@ function clickEquals() {
   if (num2 === '') {
     return;
   } else {
-    if (hasDecimal(`${operate(num1, operator, num2)}`) === true) {
+    if (`${operate(num1, operator, num2)}` === 'snark') {
+      displayValue = 'Nice try muthafucka!';
+      num1 = null;
+      num2 = null;
+      operator = null;
+      calculated = true;
+    } else if (hasDecimal(`${operate(num1, operator, num2)}`) === true) {
       displayValue = roundToX(`${operate(num1, operator, num2)}`, 8);
     } else {
-    displayValue = `${operate(num1, operator, num2)}`;
+      displayValue = `${operate(num1, operator, num2)}`;
     }
     num1 = null;
     num2 = '';
@@ -99,7 +114,7 @@ function clickEquals() {
   }
 }
 
-function clearCalculator () {
+function clearCalculator() {
   num1 = null;
   num2 = '';
   operator = null;
@@ -115,11 +130,17 @@ function operate(num1, operator, num2) {
   } if (operator === '*') {
     return Number(num1) * Number(num2);
   } if (operator === '/') {
-    return Number(num1) / Number(num2);
+    if (num2 === 0 || num2 === '0') {
+      return 'snark'
+    } else {
+      return Number(num1) / Number(num2);
+    }
   }
 }
 
-function hasDecimal (n) {
+console.log(operate(8, '/', 0))
+
+function hasDecimal(n) {
   let result = (n - Math.floor(n)) !== 0;
 
   if (result) return true;
