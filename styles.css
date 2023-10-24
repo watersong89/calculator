@@ -1,3 +1,7 @@
+.calculator-container {
+  padding: 20px;;
+}
+
 .display {
   min-height: 40px;
 }
