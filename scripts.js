@@ -13,7 +13,6 @@ let pointButton = document.querySelector('.js-point-button');
 
 updateDisplay();
 
-
 numButtons.forEach(button => {
   button.addEventListener('click', () => {
     addNumber(button.value);
@@ -42,7 +41,6 @@ pointButton.addEventListener('click', () => {
   addPoint(pointButton.value);
   updateDisplay();
 })
-
 
 function addNumber(input) {
   if (displayValue === 0 || displayValue === '0' || calculated === true) {
@@ -138,11 +136,8 @@ function operate(num1, operator, num2) {
   }
 }
 
-console.log(operate(8, '/', 0))
-
 function hasDecimal(n) {
   let result = (n - Math.floor(n)) !== 0;
-
   if (result) return true;
   else return false;
 }
