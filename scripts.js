@@ -146,3 +146,9 @@ function roundToX(num, decimals) {
   const multiplier = Math.pow(10, decimals);
   return Math.round(num * multiplier) / multiplier;
 }
+
+window.addEventListener('keydown', (e) => {
+  element = document.querySelector(`button[name="${e.key}"]`);
+  if (element === null) return;
+  element.click();
+})
