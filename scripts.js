@@ -2,10 +2,8 @@ let num1 = null;
 let num2 = null;
 let operator = null;
 let displayValue = '';
-let runningTotalValue = '';
 
 let displayElement = document.querySelector('.display');
-let runningTotalElement = document.querySelector('.running-total');
 let numButtons = document.querySelectorAll('.js-number-button');
 let operatorButtons = document.querySelectorAll('.js-operator-button');
 let equalsButton = document.querySelector('.js-equals-button');
@@ -39,6 +37,15 @@ function operate(num1, operator, num2) {
   }
 }
 
+function updateCalculation() {
+  let operationArray = displayValue.split(" ")
+  num1 = operationArray[0];
+  operator = operationArray[1];
+  num2 = operationArray[2];
+  let result = operate(num1, operator, num2);
+  displayElement.textContent = result;
+}
+
 function updateDisplay() {
   displayElement.textContent = displayValue;
 }
@@ -60,18 +67,17 @@ numButtons.forEach(button => {
 
 operatorButtons.forEach(button => {
   button.addEventListener('click', () => {
+    if (operator === null) {
     displayValue += ` ${button.value} `
     updateDisplay();
+    }
+    updateCalculation();
   })
 })
 
 equalsButton.addEventListener('click', () => {
-  let operationArray = displayValue.split(" ")
-  num1 = operationArray[0];
-  operator = operationArray[1];
-  num2 = operationArray[2];
-  let result = operate(num1, operator, num2);
-  displayElement.textContent = result;
+  updateCalculation();
+  updateDisplay();
 })
 
 clearButton.addEventListener('click', () => {
