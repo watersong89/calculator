@@ -1,6 +1,7 @@
 let num1 = null;
 let num2 = null;
-let operator = null;
+let operator1 = null;
+let operator2 = null;
 let displayValue = '';
 
 let displayElement = document.querySelector('.display');
@@ -36,50 +37,3 @@ function operate(num1, operator, num2) {
     return divide(num1, num2);
   }
 }
-
-function updateCalculation() {
-  let operationArray = displayValue.split(" ")
-  num1 = operationArray[0];
-  operator = operationArray[1];
-  num2 = operationArray[2];
-  let result = operate(num1, operator, num2);
-  displayElement.textContent = result;
-}
-
-function updateDisplay() {
-  displayElement.textContent = displayValue;
-}
-
-function clearCalculator() {
-  num1 = null;
-  num2 = null;
-  operator = null;
-  displayValue = '';
-  updateDisplay();
-}
-
-numButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    displayValue += button.value;
-    updateDisplay();
-  })
-})
-
-operatorButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    if (operator === null) {
-    displayValue += ` ${button.value} `
-    updateDisplay();
-    }
-    updateCalculation();
-  })
-})
-
-equalsButton.addEventListener('click', () => {
-  updateCalculation();
-  updateDisplay();
-})
-
-clearButton.addEventListener('click', () => {
-  clearCalculator();
-})
