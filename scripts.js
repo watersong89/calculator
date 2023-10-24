@@ -2,6 +2,7 @@ let num1 = null;
 let num2 = '';
 let operator = null;
 let displayValue = '0';
+let calculated = false;
 
 let displayElement = document.querySelector('.display');
 let numButtons = document.querySelectorAll('.js-number-button');
@@ -26,9 +27,15 @@ operatorButtons.forEach(button => {
   })
 })
 
+equalsButton.addEventListener('click', () => {
+  clickEquals();
+  updateDisplay();
+})
+
 function addNumber(input) {
-  if (displayValue === 0 || displayValue === '0') {
+  if (displayValue === 0 || displayValue === '0' || calculated === true) {
     displayValue = input;
+    calculated = false;
   } else if (num1 === null) {
     displayValue += input;
   } else if (num1 !== null) {
@@ -55,7 +62,11 @@ function updateDisplay() {
 }
 
 function clickEquals() {
-
+  displayValue = `${operate(num1, operator, num2)}`;
+  num1 = null;
+  num2 = '';
+  operator = null;
+  calculated = true;
 }
 
 function operate(num1, operator, num2) {
