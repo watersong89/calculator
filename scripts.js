@@ -67,11 +67,15 @@ function updateDisplay() {
 }
 
 function clickEquals() {
-  displayValue = `${operate(num1, operator, num2)}`;
-  num1 = null;
-  num2 = '';
-  operator = null;
-  calculated = true;
+  if (num2 === '') {
+    return;
+  } else {
+    displayValue = `${operate(num1, operator, num2)}`;
+    num1 = null;
+    num2 = '';
+    operator = null;
+    calculated = true;
+  }
 }
 
 function clearCalculator () {
